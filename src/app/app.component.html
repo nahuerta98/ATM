@@ -1,0 +1,115 @@
+<div class="main container">
+  <div class="row">
+    <div class="col-6">
+      <div class="container">
+        <img src="../assets/img/cajero.jpg" alt="cajero">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="container">
+        <div class="row bg-dark">
+            <h1> {{title}} </h1>
+        </div>
+        <!-- Deposito Cajero -->
+        <div class="row">
+          <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-primary" (click)="show3=!show3" > {{opcion}} </button>
+          </div>
+          <form *ngIf="show3">
+            <div class="form-group mt-1">
+              <label> Total de billetes de $100: </label>
+              <input type="number" class="form-control" [(ngModel)]="billeteCien" name="billeteCien">
+            </div>
+
+            <div class="form-group mt-1">
+              <label> Total de billetes de $200: </label>
+              <input type="number" class="form-control" [(ngModel)]="billeteDoscientos" name="billeteDoscientos">
+            </div>
+
+            <div class="form-group mt-1">
+              <label> Total de billetes de $500: </label>
+              <input type="number" class="form-control" [(ngModel)]="billeteQuinientos" name="billeteQuinientos">
+            </div>
+
+            <div class="d-grid gap-2 mt-3">
+              <button type="submit" class="btn btn-success" (click)="checkOut2=!checkOut2"> Realizar Operación </button>
+            </div>
+            <div class="alert alert-success" role="alert" *ngIf="checkOut2">
+              <h6> ¡Transacción Exitosa! </h6>
+              <p> Favor de consultar el saldo. </p>
+            </div>
+          </form>
+          
+        </div>
+        <!-- FIN Deposito Cajero -->
+
+         <!-- Consulta Saldo -->
+         <div class="row">
+          <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-primary" (click)="show2=!show2"  (click)="totalDinero()"> {{opcionUno}} </button>
+          </div>
+
+          <div class="alert alert-secondary mt-2" role="alert" *ngIf="show2">
+            <h5> El saldo disponible es de: $ {{totalCajero}} </h5>
+          </div>
+        </div>
+        <!-- FIN Consulta Saldo -->
+
+        <!-- Retiro Cajero -->
+        <div class="row">
+
+          <!-- Botón -->
+          <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-primary" (click)="show=!show"> {{opcionDos}} </button>
+          </div>
+          <!-- FIN Botón -->
+
+          <!-- Incio Operación Retiro de Efectivo -->
+          <form *ngIf="show">
+
+            <div class="form-group mt-2">
+              <label> Ingrese monto a retirar: </label>
+              <input type="number" class="form-control" [(ngModel)]="retiro" name="retiro">
+            </div>
+
+            <div class="alert alert-danger" *ngIf="alert" role="alert">
+              Cantidad no permitida para retirar, por favor intenta de nuevo.
+            </div>
+
+            <div class="alert alert-danger" *ngIf="alert2" role="alert">
+              Cantidad excede del saldo disponible, por favor intenta de nuevo.
+            </div>
+
+            <div class="d-grid gap-2 mt-3">
+              <button type="submit" class="btn btn-success" (click)="retiroCajero()"> Realizar Operación </button>
+            </div>
+            
+            <div class="alert alert-success" role="alert" *ngIf="checkOut">
+              <h6> ¡Transacción Exitosa! </h6>
+              <h5> <strong> El saldo actual es de: $ {{nuevoSaldo}} </strong></h5>
+            </div>
+
+            <div class="container">
+              <div class="d-grid gap-2 mt-3 mb-2">
+                <button class="btn btn-warning mt-2" (click)="totalBilletes()"> Retira tu dinero: </button>
+              </div>
+              <p> Total billetes de 500 : {{retiroAux}} </p>
+              <p> Total billetes de 200 : {{retiroAux2}} </p>
+              <p> Total billetes de 100 : {{retiroAux3}} </p>
+            </div>
+
+          </form>
+        </div>
+        <!-- FIN Operación Retiro de Efectivo-->
+        
+       
+       
+        
+      </div>
+
+      
+
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
